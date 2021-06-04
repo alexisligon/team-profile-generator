@@ -46,6 +46,13 @@ const questions = [
         type: 'input',
         message: 'Intern School',
         name: 'school'
+    },
+    //add another employee?
+    {
+        type: 'list',
+        message: 'Add another employee?',
+        name: 'add',
+        choices: ['Yes', 'No']
     }
 ]
 
