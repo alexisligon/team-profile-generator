@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-const questions = [
+const employeeQuestions = [
     { //new employee, if no then end questions
         type: 'list',
         message: 'New Employee?',
@@ -29,24 +29,36 @@ const questions = [
         name: 'type',
         choices: ['Manager', 'Engineer', 'Intern']
     },
-    //additional questions for manager
+]
+
+const managerQuestion = [
+    //additional question for manager
     {
         type: 'input',
         message: 'Manager office number',
         name: 'officeNumber'
     },
+]
+
+const engineerQuestion = [
     //additional questions for engineer
     {
         type: 'input',
         message: 'Engineer github',
         name: 'github'
     },
+]
+
+const internQuestion = [
     //additional questions for intern
     {
         type: 'input',
         message: 'Intern School',
         name: 'school'
     },
+]
+
+const anotherQuestion = [
     //add another employee?
     {
         type: 'list',
