@@ -57,13 +57,25 @@ const internQuestion = [
     },
 ]
 
-const anotherQuestion = [
+const askLastQuestions = () => {
+    inquirer.prompt(lastQuestion).then((answer)=>{
+        switch (answer.add) {
+            case 'yes':
+            inquirer.prompt(questions).then(console.log('all questions answered!'));
+            break;
+
+            case 'no':
+            console.log('all questions answered!');
+            break;
+        }
+    })
+}
+const lastQuestion = [
     //add another employee?
     {
-        type: 'list',
+        type: 'confirm',
         message: 'Add another employee?',
         name: 'add',
-        choices: ['Yes', 'No']
     }
 ]
 
@@ -71,19 +83,13 @@ inquirer.prompt(questions).then((answer) => {
     //switch statement for other question prompts based on type of job role
     switch (answer.role) {
         case 'Manager':
-            inquirer.prompt(managerQuestion).then(()=>{
-                console.log('all questions answered!')
-            });
+            inquirer.prompt(managerQuestion).then(askLastQuestions);
             break;
         case 'Engineer':
-            inquirer.prompt(engineerQuestion).then(()=>{
-                console.log('all questions answered!')
-            });
+            inquirer.prompt(engineerQuestion).then(askLastQuestions);
             break;
         case 'Intern':
-            inquirer.prompt(internQuestion).then(()=>{
-                console.log('all questions answered!')
-            });
+            inquirer.prompt(internQuestion).then(askLastQuestions);
             break;
     }
     })
