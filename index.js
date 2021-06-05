@@ -2,11 +2,6 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 
 const questions = [
-    { //new employee, if no then end questions
-        type: 'confirm',
-        message: 'New Employee?',
-        name: 'new',
-    },
     {
         type: 'input',
         message: 'Employee Name',
@@ -82,7 +77,7 @@ const lastQuestion = [
 ]
 
 startQuestions = () => {
-    inquirer.prompt(questions).then((answer) => {
+    inquirer.prompt(questions).then((answer) => {       
         //switch statement for other question prompts based on type of job role
         switch (answer.role) {
             case 'Manager':
@@ -102,8 +97,6 @@ startQuestions = () => {
 startQuestions()
 
 //start with employee questions
-//if yes to new employee, continue
-//if no, end application
 
 //if manager selected, start manager questions
 //if engineer selected, start engineer questions
