@@ -59,12 +59,14 @@ const internQuestion = [
 
 const askLastQuestions = () => {
     inquirer.prompt(lastQuestion).then((answer)=>{
+
         switch (answer.add) {
-            case 'yes':
-            inquirer.prompt(questions).then(console.log('all questions answered!'));
+            case true:
+                console.log('working!!!!')
+            startQuestions();
             break;
 
-            case 'no':
+            case false:
             console.log('all questions answered!');
             break;
         }
@@ -79,20 +81,25 @@ const lastQuestion = [
     }
 ]
 
-inquirer.prompt(questions).then((answer) => {
-    //switch statement for other question prompts based on type of job role
-    switch (answer.role) {
-        case 'Manager':
-            inquirer.prompt(managerQuestion).then(askLastQuestions);
-            break;
-        case 'Engineer':
-            inquirer.prompt(engineerQuestion).then(askLastQuestions);
-            break;
-        case 'Intern':
-            inquirer.prompt(internQuestion).then(askLastQuestions);
-            break;
-    }
-    })
+startQuestions = () => {
+    inquirer.prompt(questions).then((answer) => {
+        //switch statement for other question prompts based on type of job role
+        switch (answer.role) {
+            case 'Manager':
+                inquirer.prompt(managerQuestion).then(askLastQuestions);
+                break;
+            case 'Engineer':
+                inquirer.prompt(engineerQuestion).then(askLastQuestions);
+                break;
+            case 'Intern':
+                inquirer.prompt(internQuestion).then(askLastQuestions);
+                break;
+        }
+        })
+
+}
+
+startQuestions()
 
 //start with employee questions
 //if yes to new employee, continue
