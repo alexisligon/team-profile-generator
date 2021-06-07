@@ -6,6 +6,10 @@ describe("Engineer class", () => {
   it("getGit should return engineer's github username", () => {
     const userName = employeeInstance.getGit();
     expect(userName).toBe('iLoveGitHub');
-
+  });
+  
+  it("getRole should return engineer role", () => {
+    const role = employeeInstance.getRole();
+    expect(role).toBe('Engineer');
   });
 })

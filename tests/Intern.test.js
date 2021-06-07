@@ -6,5 +6,10 @@ describe("Intern class", () => {
     it("getSchool should return intern's school", () => {
         const school = employeeInstance.getSchool();
         expect(school).toBe('UNC Chapel Hill');
-    })
+    });
+
+    it("getRole should return intern role", () => {
+        const role = employeeInstance.getRole();
+        expect(role).toBe('Intern');
+      });
 })
