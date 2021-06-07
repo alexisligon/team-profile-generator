@@ -1,6 +1,11 @@
 const Engineer = require("../lib/Engineer");
 
 describe("Engineer class", () => {
-  it("getName should return employee's name", () => {
-    expect(new Employee('lex', 1, 'gmail').getName()).toBe('lex');
-  })});
+  const employeeInstance = new Engineer('lex', 1, 'gmail', 'iLoveGitHub');
+
+  it("getGit should return engineer's github username", () => {
+    const userName = employeeInstance.getGit();
+    expect(userName).toBe('iLoveGitHub');
+
+  });
+})

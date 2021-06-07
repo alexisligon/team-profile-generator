@@ -12,4 +12,8 @@ describe("Employee class", () => {
     const id = employeeInstance.getId();
     expect(id).toBe(1);
   })
+  it("getEmail should return employee's email", () => {
+    const email = employeeInstance.getEmail();
+    expect(email).toBe('gmail');
+  })
 });
