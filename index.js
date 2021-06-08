@@ -4,8 +4,8 @@ const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
-// const { generateCard } = require('./generateEmployee')
 
+//array for new employees to be pushed to
 const employees = [];
 
 //questions for information of all employees
@@ -54,11 +54,11 @@ const engineerQuestion = [
         message: "Enter the engineer's github username.",
         name: "github",
     },
-   {
-       type: "confirm",
-       message: "Would you like to add another employee?",
-       name: "add"
-   }
+    {
+        type: "confirm",
+        message: "Would you like to add another employee?",
+        name: "add"
+    }
 
 ];
 
@@ -91,16 +91,20 @@ const internQuestion = [
     }
 ];
 
-function working() {
-    console.log("working!!!!");
+generateTeam = () => {
+    fs.appendFile('./dist/team.html',
+        `
+    </body>
+    </html>`,
+        (err) => err ? console.log(err) : console.log('Team has been built!'))
 }
 
-generateTeam = () => {
-    console.log('Employees: ', employees)
+writeFile = () => {
+
 }
 //function for adding engineer, intern, or generate team
 addOrGenerate = () => {
-    inquirer.prompt(  [{
+    inquirer.prompt([{
         type: "list",
         message: "What type of employee would you like to add?",
         name: "role",
@@ -121,6 +125,29 @@ addOrGenerate = () => {
                 engineer.getRole();
                 engineer.getGit();
                 employees.push(engineer);
+
+                fs.appendFile('./dist/team.html',
+                `
+                <div>
+                <div>
+                    <h2>${engineer.getName()}</h2>
+                    <h3>${engineer.getRole()}</h3>
+                </div>
+
+                <!--card info section-->
+                <div>
+                    <ul>
+                    <li>ID: ${engineer.getId()}</li>
+                    <!--link to email-->
+                    <li>EMAIL: ${engineer.getEmail()}</li>
+                    <li>Github: ${engineer.getGit()}</li>
+                    </ul>
+                </div>
+                </div>
+
+                `, 
+                (err) => err ? console.log(err) : console.log('Successfully added employee!'))
+
                 if (engineerAnswer.add == true) {
                     addOrGenerate();
                 } else {
@@ -128,7 +155,7 @@ addOrGenerate = () => {
                     generateTeam();
                 }
             });
-        } else if(answer.role === "Intern") {
+        } else if (answer.role === "Intern") {
             inquirer.prompt(internQuestion).then((internAnswer) => {
                 const intern = new Intern(
                     internAnswer.intName,
@@ -142,6 +169,28 @@ addOrGenerate = () => {
                 intern.getRole();
                 intern.getSchool();
                 employees.push(intern);
+
+                fs.appendFile('./dist/team.html',
+                `
+                <div>
+                <div>
+                    <h2>${intern.getName()}</h2>
+                    <h3>${intern.getRole()}</h3>
+                </div>
+
+                <!--card info section-->
+                <div>
+                    <ul>
+                    <li>ID: ${intern.getId()}</li>
+                    <!--link to email-->
+                    <li>Email: ${intern.getEmail()}</li>
+                    <li>School: ${intern.getSchool()}</li>
+                    </ul>
+                </div>
+                </div>
+                
+                `, 
+                (err) => err ? console.log(err) : console.log('Successfully added employee!'))
                 if (internAnswer.add == true) {
                     addOrGenerate();
                 } else {
@@ -161,49 +210,53 @@ startQuestions = () => {
     //start the team building by creating a manager for the team
     inquirer.prompt(managerQuestions).then((answer) => {
         const manager = new Manager(
-            answer.managerName, 
-            answer.managerID, 
-            answer.managerEmail, 
+            answer.managerName,
+            answer.managerID,
+            answer.managerEmail,
             answer.officeNumber
-            );
+        );
         manager.getName();
         manager.getId();
         manager.getEmail();
         manager.getRole();
         manager.getOfficeNumber();
         employees.push(manager);
+
+        fs.writeFile('./dist/team.html',
+            `
+        <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Team</title>
+  </head>
+  <body>
+    <h1>My Team</h1>
+
+             <div>
+                <div>
+                    <h2>${manager.getName()}</h2>
+                    <h3>${manager.getRole()}</h3>
+                </div>
+
+                <!--card info section-->
+                <div>
+                    <ul>
+                    <li>ID: ${manager.getId()}</li>
+                    <!--link to email-->
+                    <li>Email: ${manager.getEmail()}</li>
+                    <li>School: ${manager.getOfficeNumber()}</li>
+                    </ul>
+                </div>
+            </div>
     
+        `, 
+        (err) => err ? console.log(err) : console.log('Successfully added employee!'))
+
         addOrGenerate();
     });
 };
 //initialize beginning questions with node index.js
 startQuestions();
-
-//function for writing file
-
-//function for last question, loop over questions again if true,
-//stop application if false
-// const askLastQuestions = () => {
-//     inquirer.prompt(lastQuestion).then((answer) => {
-
-//         switch (answer.add) {
-//             case true:
-//                 startQuestions();
-//                 break;
-
-//             case false:
-//                 console.log('Team has been built!');
-//                 break;
-//         }
-//     })
-// }
-
-// //variable for the last question
-// const lastQuestion = [
-//     //add another employee?
-//     {
-//         type: 'confirm',
-//         message: 'Add another employee?',
-//         name: 'add',
-//     }
-// ]
