@@ -30,12 +30,6 @@ const managerQuestions = [
         message: "Enter the manager's office phone number.",
         name: "officeNumber",
     },
-    {
-        type: "list",
-        message: "What type of employee would you like to add?",
-        name: "role",
-        choices: ["Engineer", "Intern", "Generate Team"],
-    }
 ];
 
 //engineer specific question
@@ -60,12 +54,11 @@ const engineerQuestion = [
         message: "Enter the engineer's github username.",
         name: "github",
     },
-    {
-        type: "list",
-        message: "What type of employee would you like to add?",
-        name: "role",
-        choices: ["Engineer", "Intern", "Generate Team"],
-    }
+   {
+       type: "confirm",
+       message: "Would you like to add another employee?",
+       name: "add"
+   }
 
 ];
 
@@ -92,59 +85,84 @@ const internQuestion = [
         name: "school",
     },
     {
-        type: "list",
-        message: "What type of employee would you like to add?",
-        name: "role",
-        choices: ["Engineer", "Intern", "Generate Team"],
+        type: "confirm",
+        message: "Would you like to add another employee?",
+        name: "add"
     }
 ];
 
 function working() {
     console.log("working!!!!");
 }
-
-//function to start asking initial questions
-//then ask specific questions based on job role answer
-startQuestions = () => {
-    inquirer.prompt(questions).then((answer) => {
-        const employee = new Employee(answer.name, answer.id, answer.email);
-        employee.getName();
-        employee.getId();
-        employee.getEmail();
-        employee.getRole();
-        if (answer.role == "Manager") {
-            inquirer.prompt(managerQuestion).then((managerAnswer) => {
-                const manager = new Manager(
-                    answer.name,
-                    answer.id,
-                    answer.email,
-                    managerAnswer.officeNumber,
-                );
-                employees.push(manager);
-            });
-
-        } else if (answer.role == "Engineer") {
+//function for adding engineer, intern, or generate team
+addOrGenerate = () => {
+    inquirer.prompt(  [{
+        type: "list",
+        message: "What type of employee would you like to add?",
+        name: "role",
+        choices: ["Engineer", "Intern", "Generate Team"],
+    }]
+    ).then((answer) => {
+        if (answer.role === "Engineer") {
             inquirer.prompt(engineerQuestion).then((engineerAnswer) => {
                 const engineer = new Engineer(
-                    answer.name,
-                    answer.id,
-                    answer.email,
+                    engineerAnswer.engName,
+                    engineerAnswer.engID,
+                    engineerAnswer.engEmail,
                     engineerAnswer.github
                 );
-                engineer.printInfo().printGit();
+                engineer.getName();
+                engineer.getId();
+                engineer.getEmail();
+                engineer.getRole();
+                engineer.getGit();
+                if (engineerAnswer.add == true) {
+                    addOrGenerate();
+                } else {
+                    //generate team here
+                }
             });
-        } else {
+        } else if(answer.role === "Intern") {
             inquirer.prompt(internQuestion).then((internAnswer) => {
                 const intern = new Intern(
-                    answer.name,
-                    answer.id,
-                    answer.email,
-                    internAnswer.school
+                    internAnswer.intName,
+                    internAnswer.intID,
+                    internAnswer.intEmail,
+                    internAnswer.school,
                 );
-                intern.printInfo().printSchool();
+                intern.getName();
+                intern.getId();
+                intern.getEmail();
+                intern.getRole();
+                intern.getSchool();
+                if (internAnswer.add == true) {
+                    addOrGenerate();
+                } else {
+                    //generate team here
+                }
             });
+        } else {
+            //generate team here
         }
-        startQuestions()
+    })
+}
+
+//function to start asking initial questions
+startQuestions = () => {
+    //start the team building by creating a manager for the team
+    inquirer.prompt(managerQuestions).then((answer) => {
+        const manager = new Manager(
+            answer.managerName, 
+            answer.managerID, 
+            answer.managerEmail, 
+            answer.officeNumber
+            );
+        manager.getName();
+        manager.getId();
+        manager.getEmail();
+        manager.getRole();
+        manager.getOfficeNumber();
+        addOrGenerate();
     });
 };
 //initialize beginning questions with node index.js
