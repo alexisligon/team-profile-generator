@@ -116,6 +116,7 @@ addOrGenerate = () => {
                 engineer.getEmail();
                 engineer.getRole();
                 engineer.getGit();
+                employees.push(engineer);
                 if (engineerAnswer.add == true) {
                     addOrGenerate();
                 } else {
@@ -135,6 +136,7 @@ addOrGenerate = () => {
                 intern.getEmail();
                 intern.getRole();
                 intern.getSchool();
+                employees.push(intern);
                 if (internAnswer.add == true) {
                     addOrGenerate();
                 } else {
@@ -162,6 +164,8 @@ startQuestions = () => {
         manager.getEmail();
         manager.getRole();
         manager.getOfficeNumber();
+        employees.push(manager);
+    
         addOrGenerate();
     });
 };
