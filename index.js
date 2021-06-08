@@ -9,72 +9,99 @@ const Intern = require("./lib/Intern");
 const employees = [];
 
 //questions for information of all employees
-const questions = [
+const managerQuestions = [
     {
-        type: "list",
-        message: "Type of Employee",
-        name: "role",
-        choices: ["Manager", "Engineer", "Intern", "Generate Team"],
+        type: "input",
+        message: "Enter the team manager's name.",
+        name: "managerName"
     },
     {
         type: "input",
-        message: "Employee Name",
-        name: "name",
+        message: "Enter the manager's ID.",
+        name: "managerID",
     },
     {
         type: "input",
-        message: "Employee ID",
-        name: "id",
+        message: "Enter the manager's email.",
+        name: "managerEmail",
     },
     {
         type: "input",
-        message: "Employee email",
-        name: "email",
-    },
-];
-
-//manager specific question
-const managerQuestion = [
-    {
-        type: "input",
-        message: "Manager office number",
+        message: "Enter the manager's office phone number.",
         name: "officeNumber",
     },
+    {
+        type: "list",
+        message: "What type of employee would you like to add?",
+        name: "role",
+        choices: ["Engineer", "Intern", "Generate Team"],
+    }
 ];
 
 //engineer specific question
 const engineerQuestion = [
     {
         type: "input",
-        message: "Engineer github",
+        message: "Enter the engineer's name.",
+        name: "engName",
+    },
+    {
+        type: "input",
+        message: "Enter the engineer's ID.",
+        name: "engID"
+    },
+    {
+        type: "input",
+        message: "Enter the engineer's email.",
+        name: "engEmail"
+    },
+    {
+        type: "input",
+        message: "Enter the engineer's github username.",
         name: "github",
     },
+    {
+        type: "list",
+        message: "What type of employee would you like to add?",
+        name: "role",
+        choices: ["Engineer", "Intern", "Generate Team"],
+    }
+
 ];
 
 //intern specific question
 const internQuestion = [
     {
         type: "input",
-        message: "Intern School",
+        message: "Enter the intern's name.",
+        name: "intName",
+    },
+    {
+        type: "input",
+        message: "Enter the intern's ID.",
+        name: "intID"
+    },
+    {
+        type: "input",
+        message: "Enter the intern's email.",
+        name: "intEmail"
+    },
+    {
+        type: "input",
+        message: "Enter the intern's school.",
         name: "school",
     },
+    {
+        type: "list",
+        message: "What type of employee would you like to add?",
+        name: "role",
+        choices: ["Engineer", "Intern", "Generate Team"],
+    }
 ];
 
 function working() {
     console.log("working!!!!");
 }
-
-//if else for other question prompts based on type of job role
-const whichRole = (answer) => {
-    console.log("Role: ", answer.role);
-    // if (answer.role == 'Manager') {
-    //     managerInfo();
-    // } else if (answer.role == 'Engineer') {
-    //     inquirer.prompt(engineerQuestion);
-    // } else {
-    //     inquirer.prompt(internQuestion);
-    // }
-};
 
 //function to start asking initial questions
 //then ask specific questions based on job role answer
