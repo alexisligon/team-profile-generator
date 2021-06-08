@@ -94,6 +94,10 @@ const internQuestion = [
 function working() {
     console.log("working!!!!");
 }
+
+generateTeam = () => {
+    console.log('Employees: ', employees)
+}
 //function for adding engineer, intern, or generate team
 addOrGenerate = () => {
     inquirer.prompt(  [{
@@ -121,6 +125,7 @@ addOrGenerate = () => {
                     addOrGenerate();
                 } else {
                     //generate team here
+                    generateTeam();
                 }
             });
         } else if(answer.role === "Intern") {
@@ -141,10 +146,12 @@ addOrGenerate = () => {
                     addOrGenerate();
                 } else {
                     //generate team here
+                    generateTeam();
                 }
             });
         } else {
             //generate team here
+            generateTeam();
         }
     })
 }
