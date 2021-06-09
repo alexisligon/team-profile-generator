@@ -135,8 +135,7 @@ addOrGenerate = () => {
                 employees.push(engineer);
 
                 fs.appendFile('./dist/team.html',
-                    `
-                <div class="col-sm-6" style="width: 18rem">
+                    `<div class="col-sm-6" style="width: 18rem">
                  <div class="card">
                     <div class="card-body">
                         <h5 class="card-title text-center">${engineer.getName()}</h5>
@@ -148,9 +147,7 @@ addOrGenerate = () => {
                         <li class="list-group-item">Github Username:<a href="https://github.com/${engineer.getGit()}">${engineer.getGit()}</a></li>
                     </ul>
                     </div>
-                </div>
-                
-                `,
+                </div>`,
                     (err) => err ? console.log(err) : console.log('Successfully added employee!'))
 
                 if (engineerAnswer.add == true) {
@@ -176,8 +173,7 @@ addOrGenerate = () => {
                 employees.push(intern);
 
                 fs.appendFile('./dist/team.html',
-                `
-                <div class="col-sm-6" style="width: 18rem">
+                `<div class="col-sm-6" style="width: 18rem">
                     <div class="card" >
                     <div class="card-body">
                         <h5 class="card-title text-center">${intern.getName()}</h5>
@@ -190,9 +186,7 @@ addOrGenerate = () => {
                     </ul>
                     </div>
                 </div>
-                </div>
-                
-                `,
+                </div>`,
                     (err) => err ? console.log(err) : console.log('Successfully added employee!'))
                 if (internAnswer.add == true) {
                     addOrGenerate();
@@ -226,47 +220,44 @@ startQuestions = () => {
         employees.push(manager);
 
         fs.writeFile('./dist/team.html',
-        `
-        <!DOCTYPE html>
+`<!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-      crossorigin="anonymous"
-    ></script>
-    <title>My Team</title>
-  </head>
-  <body>
-    <h1>My Team</h1>
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+        crossorigin="anonymous"
+        />
+        <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"
+        ></script>
+        <title>My Team</title>
+    </head>
+    <body>
+        <h1>My Team</h1>
 
-    <div class="row">
+        <div class="row">
 
-      <div class="col-sm-6">
-        <div class="card" style="width: 18rem">
-          <div class="card-body">
-            <h5 class="card-title text-center">${manager.getName()}</h5>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item text-center"><dt>${manager.getRole()}</dt></li>
-            <li class="list-group-item">Email: <a href="mailto:${manager.getEmail()}" class="card-link">${manager.getEmail()}</a></li>
-            <li class="list-group-item">ID: ${manager.getId()}</li>
-            <li class="list-group-item">Office Number: ${manager.getOfficeNumber()}</li>
-          </ul>
-        </div>
-      </div>
-        
-        `,
-    
+        <div class="col-sm-6">
+            <div class="card" style="width: 18rem">
+            <div class="card-body">
+                <h5 class="card-title text-center">${manager.getName()}</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item text-center"><dt>${manager.getRole()}</dt></li>
+                <li class="list-group-item">Email: <a href="mailto:${manager.getEmail()}" class="card-link">${manager.getEmail()}</a></li>
+                <li class="list-group-item">ID: ${manager.getId()}</li>
+                <li class="list-group-item">Office Number: ${manager.getOfficeNumber()}</li>
+            </ul>
+            </div>
+        </div>`,
+
             (err) => err ? console.log(err) : console.log('Successfully added employee!'))
 
         addOrGenerate();
